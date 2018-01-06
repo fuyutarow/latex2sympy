@@ -4,22 +4,26 @@ latex2sympy parses LaTeX math expressions and converts it into the
 equivalent SymPy form.
 
 ## Installation
-
-[ANTLR](http://www.antlr.org/) is used to generate the parser:
-
 ```
-$ antlr4 PS.g4 -o gen
+pip install git+https://github.com/fytroo/latex2sympy.git
 ```
 
 ## Usage
 
-In Python 2.7:
+In Python 3.5+:
 
 ```python
-from process_latex import process_sympy
+from latex2sympy.process_latex import process_sympy
+from sympy import symbols, latex, diff
 
-process_sympy("\\frac{d}{dx} x^{2}")
-# => "diff(x**(2), x)"
+x = symbols('x')
+tex = latex(x**3)
+# => 'x^{3}'
+process_sympy(tex)
+# => x**3
+
+process_sympy('\\frac{d}{dx} x^{2}')
+# => Derivative(x**2, x)
 ```
 
 ## Examples
